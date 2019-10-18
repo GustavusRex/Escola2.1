@@ -16,7 +16,6 @@ namespace Escola_Parte_2._1
 
 
             Console.WriteLine("Obrigado pelo uso do serviço");
-            Console.ReadLine();
             Console.ReadKey();
         }
 

@@ -13,7 +13,7 @@ namespace Escola_Parte_2._1
             Random random = new Random(); // Ramdom para gerar uma matricula aleatoria
             Matricula = random.Next(10000000);
 
-            Console.WriteLine("\nDigite o 1° nome do(a) Aluno(a)");
+         
             Nome = SoLetras2(Console.ReadLine()); // Chama o metodo para a validação do nome escrito em Aluno
 
             Console.WriteLine($"\nDigite o sexo (M = Masculino ou F = Feminino) do(a) Aluno(a) {Nome}");

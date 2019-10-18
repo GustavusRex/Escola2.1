@@ -11,12 +11,14 @@ namespace Escola_Parte_2._1
         public List<Aluno> ListaAlunosAtribuidos = new List<Aluno>();
 
         public int Codigo;
+        public int Tamanho;
 
         public void CodigoTurma()
         {
             Random random = new Random();  // Ramdom para gerar uma codigo da turma aleatorio
             Codigo = random.Next(1000);
         }
+
 
         public void ExibirProfessor() // Exibir professor dentro da turma já atribuidas a tal
         {

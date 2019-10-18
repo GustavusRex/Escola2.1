@@ -9,3 +9,14 @@ C:\Users\Dev4Jobs5\source\repos\Escola_Parte_2._1\Escola_Parte_2._1\bin\Debug\ne
 C:\Users\Dev4Jobs5\source\repos\Escola_Parte_2._1\Escola_Parte_2._1\bin\Debug\netcoreapp3.0\Escola_Parte_2._1.pdb
 C:\Users\Dev4Jobs5\source\repos\Escola_Parte_2._1\Escola_Parte_2._1\obj\Debug\netcoreapp3.0\Escola_Parte_2._1.dll
 C:\Users\Dev4Jobs5\source\repos\Escola_Parte_2._1\Escola_Parte_2._1\obj\Debug\netcoreapp3.0\Escola_Parte_2._1.pdb
+C:\Users\Dev4Jobs5\Desktop\MalucoContinua\Escola_Parte_2._1\Escola_Parte_2._1\bin\Debug\netcoreapp3.0\Escola_Parte_2._1.exe
+C:\Users\Dev4Jobs5\Desktop\MalucoContinua\Escola_Parte_2._1\Escola_Parte_2._1\bin\Debug\netcoreapp3.0\Escola_Parte_2._1.deps.json
+C:\Users\Dev4Jobs5\Desktop\MalucoContinua\Escola_Parte_2._1\Escola_Parte_2._1\bin\Debug\netcoreapp3.0\Escola_Parte_2._1.runtimeconfig.json
+C:\Users\Dev4Jobs5\Desktop\MalucoContinua\Escola_Parte_2._1\Escola_Parte_2._1\bin\Debug\netcoreapp3.0\Escola_Parte_2._1.runtimeconfig.dev.json
+C:\Users\Dev4Jobs5\Desktop\MalucoContinua\Escola_Parte_2._1\Escola_Parte_2._1\bin\Debug\netcoreapp3.0\Escola_Parte_2._1.dll
+C:\Users\Dev4Jobs5\Desktop\MalucoContinua\Escola_Parte_2._1\Escola_Parte_2._1\bin\Debug\netcoreapp3.0\Escola_Parte_2._1.pdb
+C:\Users\Dev4Jobs5\Desktop\MalucoContinua\Escola_Parte_2._1\Escola_Parte_2._1\obj\Debug\netcoreapp3.0\Escola_Parte_2._1.csprojAssemblyReference.cache
+C:\Users\Dev4Jobs5\Desktop\MalucoContinua\Escola_Parte_2._1\Escola_Parte_2._1\obj\Debug\netcoreapp3.0\Escola_Parte_2._1.AssemblyInfoInputs.cache
+C:\Users\Dev4Jobs5\Desktop\MalucoContinua\Escola_Parte_2._1\Escola_Parte_2._1\obj\Debug\netcoreapp3.0\Escola_Parte_2._1.AssemblyInfo.cs
+C:\Users\Dev4Jobs5\Desktop\MalucoContinua\Escola_Parte_2._1\Escola_Parte_2._1\obj\Debug\netcoreapp3.0\Escola_Parte_2._1.dll
+C:\Users\Dev4Jobs5\Desktop\MalucoContinua\Escola_Parte_2._1\Escola_Parte_2._1\obj\Debug\netcoreapp3.0\Escola_Parte_2._1.pdb
