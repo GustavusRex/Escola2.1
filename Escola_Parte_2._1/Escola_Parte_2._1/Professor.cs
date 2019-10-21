@@ -5,16 +5,18 @@ namespace Escola_Parte_2._1
 {
     class Professor : Pessoa
     {
-
+       public Coordenador Responsavel;
         public int Registro;
 
-        public void ColoqueAsInformacaosProfessor()
+        public void ColoqueAsInformacaosProfessor(Escola escola)
         {
-            Console.WriteLine("Aperte ESC para abortar o cadastro");
+            //Console.WriteLine("Aperte ESC para abortar o cadastro");
             Random random = new Random(); // Ramdom para gerar uma matricula aleatoria
             Registro = random.Next(10000000);
-           
-           // if (Console.ReadKey().Key == ConsoleKey.Escape) return false;
+
+            // if (Console.ReadKey().Key == ConsoleKey.Escape) return false;
+
+            escola.MostrarCoordenador();
 
             Nome = SoLetras2(Console.ReadLine()); // Chama o metodo para a validação do nome escrito em professor
 
@@ -27,7 +29,14 @@ namespace Escola_Parte_2._1
 
             Idade = ValidarIdadeP(Console.ReadLine()); //Chama o metodo para validar a idade em Aluno
 
-           // return true;
+            Console.WriteLine($"Responsavel que contratou o professor {Nome}, digite o seu registro");
+            int n = int.Parse(Console.ReadLine());
+            Responsavel = escola.ListaCoordenador.Find(a => a.Registro == n);
+            
+
+            
+
+            // return true;
 
         }
 

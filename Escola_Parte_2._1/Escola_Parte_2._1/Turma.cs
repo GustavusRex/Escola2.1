@@ -7,8 +7,9 @@ namespace Escola_Parte_2._1
     class Turma
     {
 
-        public Professor professor = new Professor();
-        public List<Aluno> ListaAlunosAtribuidos = new List<Aluno>();
+        public Professor professor = null;
+        public Coordenador Coordenador = null;
+        public List<Aluno> ListaAlunosAtribuidos = new List<Aluno>(); 
 
         public int Codigo;
         public int Tamanho;
@@ -17,6 +18,7 @@ namespace Escola_Parte_2._1
         {
             Random random = new Random();  // Ramdom para gerar uma codigo da turma aleatorio
             Codigo = random.Next(1000);
+
         }
 
 
@@ -24,13 +26,29 @@ namespace Escola_Parte_2._1
         {
             Console.WriteLine($"A Turma {Codigo} tem o professor: ");
 
-            if (professor.Idade == 0)
+            if (professor == null)
             {
                 Console.WriteLine("Não há professor nessa turma");
             }
             else
             {
-                Console.WriteLine($"O professor {professor.Nome}, com o sexo {professor.Sexo}, de idade {professor.Idade}, com o registro {professor.Registro}");
+                Console.WriteLine($"O professor {professor.Nome}, com o sexo {professor.Sexo}, de idade {professor.Idade}, com o registro {professor.Registro}," +
+                    $"Sendo como responsavel: O coordenador {professor.Responsavel.Nome} com o registro  {professor.Responsavel.Registro}");
+            }
+        }
+
+        public void ExibirCoordenador() // Exibir professor dentro da turma já atribuidas a tal
+        {
+            Console.WriteLine($"A Turma {Codigo} tem o Coordenador: ");
+
+            if (Coordenador == null)
+            {
+                Console.WriteLine("Não há professor nessa turma");
+            }
+            else
+            {
+                Console.WriteLine($"Coordenadores {Coordenador.Nome} do sexo {Coordenador.Sexo} com a idade {Coordenador.Idade}, " +
+                                  $" com o número de registro {Coordenador.Registro}");
             }
         }
 
@@ -55,9 +73,21 @@ namespace Escola_Parte_2._1
         }
         public void MostrarTudo() // Mostrar o Geral do cadastro
         {
+            Console.WriteLine($"A Turma {Codigo} tem o Coordenador: ");
+
+            if (Coordenador == null)
+            {
+                Console.WriteLine("Não há professor nessa turma");
+            }
+            else
+            {
+                Console.WriteLine($"Coordenadores {Coordenador.Nome} do sexo {Coordenador.Sexo} com a idade {Coordenador.Idade}, " +
+                                  $" com o número de registro {Coordenador.Registro}");
+            }
+
             Console.WriteLine($"A Turma {Codigo} tem o professor: ");
 
-            if (professor.Idade == 0)
+            if (professor == null)
             {
                 Console.WriteLine("Não há professor nessa turma");
             }

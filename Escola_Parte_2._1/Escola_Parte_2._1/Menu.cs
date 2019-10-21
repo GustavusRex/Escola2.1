@@ -275,9 +275,37 @@ namespace Escola_Parte_2._1
                         }
                     case 9:
                         {
-                            escola.MostrarTutto(); // Mostrar Professor e Alunos já cadastrados
-                            break;
+                            escola.MostrarTutto();
+                            Console.WriteLine("Remover aluno de uma turma");
+                            escola.RemoveAluno();
+                            escola.MostrarFinalAluno();
+                            escola.MostrarTutto();
+                                break;
 
+                        }
+                    case 10:
+                        {
+                            escola.MostrarTutto();
+                            Console.WriteLine("\nRemover professor de uma professor");
+                            escola.RemoveProfessor();
+                            escola.MostrarFinalProfessor();
+                            escola.MostrarTutto();
+                            break;
+                        }
+                    case 11:
+                        { 
+                            escola.MostrarTutto();
+                            break;
+                        }
+                    case 12:
+                        {
+                            escola.MostrarCoordenador();
+                            break;
+                        }
+                    case 13:
+                        {
+                            escola.ListaDeCoordenadores();
+                            break;
                         }
 
 
@@ -291,7 +319,7 @@ namespace Escola_Parte_2._1
             static int Sonumeros(string s)
             {
                 int n;
-                while ((!int.TryParse(s, out n)) || (n < 0 || n > 9))
+                while ((!int.TryParse(s, out n)) || (n < 0 || n > 20))
                 {
                     Console.WriteLine("Opção invalida");
                     s = Console.ReadLine();

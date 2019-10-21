@@ -11,9 +11,11 @@ namespace Escola_Parte_2._1
         public List<Aluno> ListaAlunos = new List<Aluno>();
         public List<Turma> Listaturma = new List<Turma>();
         public List<Professor> ListaProfessor = new List<Professor>();
+        public List<Coordenador> ListaCoordenador = new List<Coordenador>();
         uint NumeroProfessores;
         uint NumeroTurma;
         uint NumeroAlunos;
+        uint NumeroCoordenadores;
         int n;
 
 
@@ -50,7 +52,7 @@ namespace Escola_Parte_2._1
             {
                 Professor professor = new Professor();
                 Console.WriteLine($"Digite o 1° nome do(a) {i + 1}° Professor(a)");
-                professor.ColoqueAsInformacaosProfessor();
+                professor.ColoqueAsInformacaosProfessor(this);                  
                 //if (!professor.ColoqueAsInformacaosProfessor()) return ;
                 ListaProfessor.Add(professor);
             }
@@ -76,6 +78,25 @@ namespace Escola_Parte_2._1
 
         }
 
+        public void ListaDeCoordenadores()
+        {
+            Console.WriteLine("\n Digite a quantidade de coordenadores para o cadastro");
+
+            NumeroCoordenadores = Sonumeros2(Console.ReadLine());
+
+            for (int i = 0; i< NumeroCoordenadores; i++)
+            {
+                Coordenador coordenador = new Coordenador();
+                Console.WriteLine($"Digite o nome do(a) {i + 1}° Coordenador (a)");
+                coordenador.ColoqueAsInformacaosCoordenador();
+                ListaCoordenador.Add(coordenador);
+            }
+
+            Console.WriteLine($"Quantidade de Coordenadores cadastrados com sucesso: { NumeroCoordenadores}");
+
+
+        }
+
         public void AddProfessorTurma() // Metodo para colocar uma professor a uma turma
         {
             Console.Write("Digite o número de registro: ");
@@ -93,7 +114,7 @@ namespace Escola_Parte_2._1
 
                 Listaturma.Where(a => a.Codigo == nu).FirstOrDefault().professor = professor; // Adiciona o Professor encontrado na lista de professores dentro da turma selecionada
 
-                if (Listaturma.GroupBy(a => a.professor).Any(a => a.Count() == 2))
+                if (Listaturma.Where(a => a.professor==professor).Count() == 2)
                 {
                     ListaProfessor.Remove(professor);
                 }
@@ -101,7 +122,48 @@ namespace Escola_Parte_2._1
            
         }
 
+        public void AddCoordenadorTurma()
+        {
+            Console.Write("Digite o número de registro: ");
+            n = Sonumeros(Console.ReadLine());
+            Coordenador coordenador = ListaCoordenador.Find(x => x.Registro == n);
+            Console.Write("Digite o número o codigo da turma: ");
+            n = Sonumeros(Console.ReadLine());
+            Turma turma = Listaturma.Find(x => x.Codigo == n);
 
+            Listaturma.Where(a => a.Codigo == n).FirstOrDefault().Coordenador = coordenador;
+        }
+
+        public void RemoveAluno()
+        {
+            Console.Write("Digite o codigo da turma: ");
+            int ct = int.Parse(Console.ReadLine());
+            Turma turma = Listaturma.Find(x => x.Codigo == ct);
+            Console.Write("Digite o codigo da aluno: ");
+            int ma = int.Parse(Console.ReadLine());
+            Aluno aluno = turma.ListaAlunosAtribuidos.Find(a => a.Matricula == ma);
+
+            ListaAlunos.Add(aluno);
+            turma.ListaAlunosAtribuidos.Remove(aluno);
+        }
+
+        public void RemoveProfessor()
+        {
+            Console.Write("Digite o codigo da turma: ");
+            int ct = int.Parse(Console.ReadLine());
+            Turma turma = Listaturma.Find(x => x.Codigo == ct);
+            Professor professor = turma.professor;
+            ListaProfessor.Add(professor);
+            turma.professor = null;
+        }
+
+        public void RemoveCoordenador()
+        {
+            Console.Write("Digite o codigo da turma: ");
+            int ct = int.Parse(Console.ReadLine());
+            Turma turma = Listaturma.Find(x => x.Codigo == ct);
+            turma.Coordenador = null;
+        }
 
 
 
@@ -120,8 +182,8 @@ namespace Escola_Parte_2._1
                 aluno = ListaAlunos.Where(a => a.Matricula == n).FirstOrDefault(); // Metodo para procurar dentro da lista de alunos o aluno com a matricula cadastrada
             }
             Console.Write("Digite o número do código da turma: ");
-            int nu = Sonumeros(Console.ReadLine());
-            Turma turma = Listaturma.Find(x => x.Codigo == nu);
+            n = Sonumeros(Console.ReadLine());
+            Turma turma = Listaturma.Find(x => x.Codigo == n);
 
             if (turma.ListaAlunosAtribuidos.Count == turma.Tamanho)
             {
@@ -129,7 +191,7 @@ namespace Escola_Parte_2._1
             }
             else
             {
-                Listaturma.Where(a => a.Codigo == nu).FirstOrDefault().ListaAlunosAtribuidos.Add(aluno); // Adiciona o aluno encontrado na lista de Alunos dentro da turma selecionada
+                Listaturma.Where(a => a.Codigo == n).FirstOrDefault().ListaAlunosAtribuidos.Add(aluno); // Adiciona o aluno encontrado na lista de Alunos dentro da turma selecionada
                 ListaAlunos.Remove(aluno);
             }
 
@@ -161,7 +223,15 @@ namespace Escola_Parte_2._1
             foreach (Professor prof in ListaProfessor)
 
                 Console.WriteLine($"Professores {prof.Nome} do sexo {prof.Sexo} com a idade {prof.Idade}, " +
-                                  $" com o número de registro {prof.Registro}\n");
+                                  $" com o número de registro {prof.Registro}, Sendo como responsavel: O coordenador {prof.Responsavel.Nome} com o registro  {prof.Responsavel.Registro}");
+        }
+
+        public void MostrarCoordenador()
+        {
+            foreach (Coordenador cor in ListaCoordenador)
+
+                Console.WriteLine($"Coordenadores {cor.Nome} do sexo {cor.Sexo} com a idade {cor.Idade}, " +
+                                  $" com o número de registro {cor.Registro}");
         }
         public void MostrarTurmas()
         {
@@ -175,6 +245,7 @@ namespace Escola_Parte_2._1
             foreach (Turma turm in Listaturma)
             {
                 turm.MostrarTudo();
+                Console.WriteLine();
             }
 
         }

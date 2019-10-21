@@ -47,9 +47,9 @@ namespace Escola_Parte_2._1
         public byte ValidarIdadeA(string s)
         {
             byte n;
-            while ((!byte.TryParse(s, out n)) || (n <= 2))
+            while ((!byte.TryParse(s, out n)) || (n <= 2 || n >= 80))
             {
-                Console.WriteLine("Um aluno deve ter no mínimo 3 anos ");
+                Console.WriteLine("Um aluno deve ter no mínimo 3 anos no máximo 79 ");
                 Console.WriteLine("por favor digitar novamente com um número inteiro e valido\n");
                 s = Console.ReadLine();
             }
