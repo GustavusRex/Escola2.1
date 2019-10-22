@@ -1,6 +1,4 @@
 ﻿using System;
-
-
 namespace Escola_Parte_2._1
 {
     class Professor : Pessoa
@@ -12,22 +10,29 @@ namespace Escola_Parte_2._1
         {
             //Console.WriteLine("Aperte ESC para abortar o cadastro");
             Random random = new Random(); // Ramdom para gerar uma matricula aleatoria
-            Registro = random.Next(10000000);
+            Registro = random.Next(10000);
 
-            // if (Console.ReadKey().Key == ConsoleKey.Escape) return false;
+          //  while(escola.ListaProfessor.Exists)
 
-            escola.MostrarCoordenador();
+            
+
+            
+
+
+            // if (Console.ReadKey().FirstKey == ConsoleKey.Escape)
+                
+
 
             Nome = SoLetras2(Console.ReadLine()); // Chama o metodo para a validação do nome escrito em professor
 
             Console.WriteLine($"\nDigite o sexo (M = Masculino ou F = Feminino) do(a) Professor(a) {Nome}");
-            
 
+            // if (Console.ReadKey().Key == ConsoleKey.Escape) return false;
             Sexo = ValidarSexo(Console.ReadLine().ToUpper()); // Chama o metodo para a validação do nome escrito em professor
          
             Console.WriteLine($"\nDigite a idade(Idade é preciso ser maior de 21 e menor que 80) do(a) Professor(a) {Nome}");
-
-            Idade = ValidarIdadeP(Console.ReadLine()); //Chama o metodo para validar a idade em Aluno
+            // if (Console.ReadKey().Key == ConsoleKey.Escape) return false;
+            Idade = ValidarIdadeP(Console.ReadLine());//Chama o metodo para validar a idade em Aluno
 
             Console.WriteLine($"Responsavel que contratou o professor {Nome}, digite o seu registro");
             int n = int.Parse(Console.ReadLine());

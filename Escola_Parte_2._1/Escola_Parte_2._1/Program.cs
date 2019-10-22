@@ -7,13 +7,14 @@ namespace Escola_Parte_2._1
         static void Main(string[] args)
 
         {
-         //   var dsad = Escola.Sonumeros2(Console.ReadLine());
+            //   var dsad = Escola.Sonumeros2(Console.ReadLine());
 
 
-            Menu menu = new Menu();
+            // Menu menu = new Menu();
 
-            menu.Menyu();
-
+            // menu.Menyu();
+            NovoMenu menu = new NovoMenu();
+            menu.MenuEscola();
 
             Console.WriteLine("Obrigado pelo uso do serviço");
             Console.ReadKey();

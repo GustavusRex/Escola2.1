@@ -8,10 +8,10 @@ namespace Escola_Parte_2._1
         public int Matricula;
         public string Bolsista;
 
-        public void ColoqueAsInformacaosAlunos() 
+        public void ColoqueAsInformacaosAlunos(Escola escola) 
         {
             Random random = new Random(); // Ramdom para gerar uma matricula aleatoria
-            Matricula = random.Next(10000000);
+            Matricula = random.Next(10000);
 
          
             Nome = SoLetras2(Console.ReadLine()); // Chama o metodo para a validação do nome escrito em Aluno
@@ -20,7 +20,7 @@ namespace Escola_Parte_2._1
 
             Sexo = ValidarSexo(Console.ReadLine().ToUpper()); // Chama o metodo para a validação do sexo escrito em Aluno
 
-            Console.WriteLine($"\nDigite a idade (Idade tem que ser maior que 2) do(a) Aluno(a) {Nome} ");
+            Console.WriteLine($"\nDigite a idade (Idade tem que ser maior que 2 e menor que 80) do(a) Aluno(a) {Nome} ");
 
             Idade = ValidarIdadeA(Console.ReadLine()); // Chama o metodo para validar a idade em Aluno
 

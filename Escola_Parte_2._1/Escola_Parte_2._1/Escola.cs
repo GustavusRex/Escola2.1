@@ -28,9 +28,9 @@ namespace Escola_Parte_2._1
             for (int i = 0; i < NumeroTurma; i++) // For para rodar quantas vezes quer cadastrar uma turma
             {
                 Turma turma = new Turma();
-                turma.CodigoTurma();
+                turma.CodigoTurma(this);
                 Console.WriteLine("Digite o tamanho da turma");
-                turma.Tamanho = int.Parse(Console.ReadLine());
+                turma.Tamanho = Sonumeros2(Console.ReadLine());
                 Listaturma.Add(turma);
 
 
@@ -40,25 +40,44 @@ namespace Escola_Parte_2._1
             }
 
             Console.WriteLine($"Turma(s) cadastradas! quantidade de turmas cadastradas {NumeroTurma}");
-
+            Console.ReadKey();
         }
 
-        public void ListaDeProfessores() // Metodo para cadastrar os professores dentro dentro de escola
+        public bool ListaDeProfessores() // Metodo para cadastrar os professores dentro dentro de escola
         {
-            Console.WriteLine("Digite o número de professores que serão cadastrados na lista");
-            NumeroProfessores = Sonumeros2(Console.ReadLine()); //Metodo para validar numero 
-
-            for (int i = 0; i < NumeroProfessores; i++) // For para rodar quantas vezes quer cadastrar um professor
+            if (ListaCoordenador.Count == 0)
             {
-                Professor professor = new Professor();
-                Console.WriteLine($"Digite o 1° nome do(a) {i + 1}° Professor(a)");
-                professor.ColoqueAsInformacaosProfessor(this);                  
-                //if (!professor.ColoqueAsInformacaosProfessor()) return ;
-                ListaProfessor.Add(professor);
+                Console.WriteLine("Não há coordenadores cadastrados, não há como cadastrar um professor");
+                Console.WriteLine("Deseja cadastrar um coordenador para prosseguir? Aperte Qualquer tecla para sim e aperte esc para não");
+                if (Console.ReadKey().Key == ConsoleKey.Escape)
+                {
+                    return false;
+                }
+                else
+                {
+                    Console.WriteLine("Digite o número de coordenadores que serão cadastrados na lista");
+                    ListaDeCoordenadores();
+                }
             }
-            Console.WriteLine($"Professor(s) cadastrado com sucesso! quantidade de turmas cadastradas {NumeroProfessores}");
 
+            Console.Clear();
+            Console.WriteLine("Coordenadores disponiveis");
+                MostrarCoordenador();
+                Console.WriteLine("Digite o número de professores que serão cadastrados na lista");
+                NumeroProfessores = Sonumeros2(Console.ReadLine()); //Metodo para validar numero 
 
+                for (int i = 0; i < NumeroProfessores; i++) // For para rodar quantas vezes quer cadastrar um professor
+                {
+                    Professor professor = new Professor();
+                    Console.WriteLine($"Digite o 1° nome do(a) {i + 1}° Professor(a)");
+                    professor.ColoqueAsInformacaosProfessor(this);
+                    //if (!professor.ColoqueAsInformacaosProfessor()) return ;
+                    ListaProfessor.Add(professor);
+                }
+                Console.WriteLine($"Quantidade de  cadastradas {NumeroProfessores}");
+                Console.ReadKey();
+
+            return true;
         }
 
         public void ListaDeAlunos() // Metodo para cadastrar os alunos dentro dentro de escola
@@ -71,16 +90,17 @@ namespace Escola_Parte_2._1
             {
                 Aluno aluno = new Aluno();
                 Console.WriteLine($"Digite o nome do(a) {i + 1}° Aluno (a)");
-                aluno.ColoqueAsInformacaosAlunos();
+                aluno.ColoqueAsInformacaosAlunos(this);
                 ListaAlunos.Add(aluno);
             }
-            Console.WriteLine($"Aluno(s) cadastrado com sucesso! quantidade de turmas cadastradas {NumeroAlunos}");
-
+            Console.WriteLine($"Quantidade de alunos cadastrado com sucesso! {NumeroAlunos}");
+            Console.ReadKey();
         }
 
         public void ListaDeCoordenadores()
         {
-            Console.WriteLine("\n Digite a quantidade de coordenadores para o cadastro");
+            Console.Clear();
+            Console.WriteLine("Digite a quantidade de coordenadores para o cadastro");
 
             NumeroCoordenadores = Sonumeros2(Console.ReadLine());
 
@@ -88,31 +108,45 @@ namespace Escola_Parte_2._1
             {
                 Coordenador coordenador = new Coordenador();
                 Console.WriteLine($"Digite o nome do(a) {i + 1}° Coordenador (a)");
-                coordenador.ColoqueAsInformacaosCoordenador();
+                coordenador.ColoqueAsInformacaosCoordenador(this);
                 ListaCoordenador.Add(coordenador);
             }
 
             Console.WriteLine($"Quantidade de Coordenadores cadastrados com sucesso: { NumeroCoordenadores}");
+            Console.ReadKey();
 
 
         }
 
         public void AddProfessorTurma() // Metodo para colocar uma professor a uma turma
-        {
+        { 
+            
             Console.Write("Digite o número de registro: ");
             n = Sonumeros(Console.ReadLine());
             Professor professor = ListaProfessor.Find(x => x.Registro == n);
 
-            if (professor == null)
-                Console.WriteLine("Registro não existe");
-            else
-                professor = ListaProfessor.Where(a => a.Registro == n).FirstOrDefault(); // Metodo para procurar dentro da lista de professores o professor com o registro cadastrado
+            while (professor == null)
+            {
+                Console.WriteLine("Professor existe porém, seu registro está incorreto");
+                Console.Write("Digite novamente: ");
+                n = Sonumeros(Console.ReadLine());
+                professor = ListaProfessor.Find(x => x.Registro == n);
+            }
+
 
             Console.Write("Digite o número do codigo da turma: ");
-            int nu = Sonumeros(Console.ReadLine());
-            Turma turma = Listaturma.Find(x => x.Codigo == nu);
 
-                Listaturma.Where(a => a.Codigo == nu).FirstOrDefault().professor = professor; // Adiciona o Professor encontrado na lista de professores dentro da turma selecionada
+             n = Sonumeros(Console.ReadLine());
+            Turma turma = Listaturma.Find(x => x.Codigo == n);
+            while (turma == null)
+            {
+                Console.WriteLine("Turma existe porém seu codigo está incorreto");
+                Console.Write("Digite novamente: "); 
+                n = Sonumeros(Console.ReadLine());
+                turma = Listaturma.Find(x => x.Codigo == n);
+            }
+
+            turma.professor = professor; // Adiciona o Professor encontrado na lista de professores dentro da turma selecionada
 
                 if (Listaturma.Where(a => a.professor==professor).Count() == 2)
                 {
@@ -127,42 +161,118 @@ namespace Escola_Parte_2._1
             Console.Write("Digite o número de registro: ");
             n = Sonumeros(Console.ReadLine());
             Coordenador coordenador = ListaCoordenador.Find(x => x.Registro == n);
+
+            while (coordenador == null)
+            {
+                Console.WriteLine("Coordenador existe porém, seu registro está incorreto");
+                Console.Write("Digite novamente: ");
+                n = Sonumeros(Console.ReadLine());
+               coordenador = ListaCoordenador.Find(x => x.Registro == n);
+            }
+              
+
             Console.Write("Digite o número o codigo da turma: ");
             n = Sonumeros(Console.ReadLine());
             Turma turma = Listaturma.Find(x => x.Codigo == n);
+            while (turma == null)
+            {
+                Console.WriteLine("Turma existe porém seu codigo está incorreto");
+                Console.Write("Digite novamente: ");
+                n = Sonumeros(Console.ReadLine());
+                turma = Listaturma.Find(x => x.Codigo == n);
+            }
 
-            Listaturma.Where(a => a.Codigo == n).FirstOrDefault().Coordenador = coordenador;
+            turma.Coordenador = coordenador;
         }
 
         public void RemoveAluno()
         {
-            Console.Write("Digite o codigo da turma: ");
-            int ct = int.Parse(Console.ReadLine());
-            Turma turma = Listaturma.Find(x => x.Codigo == ct);
-            Console.Write("Digite o codigo da aluno: ");
-            int ma = int.Parse(Console.ReadLine());
-            Aluno aluno = turma.ListaAlunosAtribuidos.Find(a => a.Matricula == ma);
+            if (Listaturma.Count == 0)
+                Console.WriteLine("Não existe turmas para remover um aluno\n" +
+                    " Aperte qualquer tecla para retornar");
+            else
+            {
 
-            ListaAlunos.Add(aluno);
-            turma.ListaAlunosAtribuidos.Remove(aluno);
+                Console.Write("Digite o codigo da turma: ");
+                n = Sonumeros(Console.ReadLine());
+                Turma turma = Listaturma.Find(x => x.Codigo == n);
+                while (turma == null)
+                {
+                    Console.WriteLine("Turma existe porém seu codigo está incorreto");
+                    Console.Write("Digite novamente: ");
+                    n = Sonumeros(Console.ReadLine());
+                    turma = Listaturma.Find(x => x.Codigo == n);
+                }
+                if (turma.ListaAlunosAtribuidos.Count == 0)
+                    Console.WriteLine("Não existe alunos dentro da turma para ser removido\n");
+                else
+                {
+                    Console.Write("Digite a matricula da aluno: ");
+                    n = Sonumeros(Console.ReadLine());
+                    Aluno aluno = turma.ListaAlunosAtribuidos.Find(a => a.Matricula == n);
+
+                    while(aluno == null)
+                    {
+                        Console.WriteLine("O aluno existe porém, a matricula está incorreto");
+                        Console.Write("Digite novamente: ");
+                        n = Sonumeros(Console.ReadLine());
+                        aluno = turma.ListaAlunosAtribuidos.Find(a => a.Matricula == n);
+                    }
+
+                    ListaAlunos.Add(aluno);
+                    turma.ListaAlunosAtribuidos.Remove(aluno);
+                }
+            }
+            
         }
 
         public void RemoveProfessor()
         {
-            Console.Write("Digite o codigo da turma: ");
-            int ct = int.Parse(Console.ReadLine());
-            Turma turma = Listaturma.Find(x => x.Codigo == ct);
-            Professor professor = turma.professor;
-            ListaProfessor.Add(professor);
-            turma.professor = null;
+            if (Listaturma.Count == 0)
+                Console.WriteLine("Não existe turmas para remover um Professor\n" +
+                    " Aperte qualquer tecla para retornar");
+            else
+            {
+                Console.Write("Digite o codigo da turma: ");
+                n = int.Parse(Console.ReadLine());
+                Turma turma = Listaturma.Find(x => x.Codigo == n);
+                while (turma == null)
+                {
+                    Console.WriteLine("Turma existe porém seu codigo está incorreto");
+                    Console.Write("Digite novamente: ");
+                    n = Sonumeros(Console.ReadLine());
+                    turma = Listaturma.Find(x => x.Codigo == n);
+                }
+                Professor professor = turma.professor;
+                if (!ListaProfessor.Exists(a => a.Registro == professor.Registro))
+                {
+                    ListaProfessor.Add(professor);
+                    
+                }
+                turma.professor = null;
+            }
         }
 
         public void RemoveCoordenador()
         {
-            Console.Write("Digite o codigo da turma: ");
-            int ct = int.Parse(Console.ReadLine());
-            Turma turma = Listaturma.Find(x => x.Codigo == ct);
-            turma.Coordenador = null;
+            if (Listaturma.Count == 0)
+            Console.WriteLine("Não existe turmas para remover um Coordenador\n" +
+                " Aperte qualquer tecla para retornar");
+
+            else
+            {
+                Console.Write("Digite o codigo da turma: ");
+                n = int.Parse(Console.ReadLine());
+                Turma turma = Listaturma.Find(x => x.Codigo == n);
+                while (turma == null)
+                {
+                    Console.WriteLine("Turma existe porém seu codigo está incorreto");
+                    Console.Write("Digite novamente: ");
+                    n = Sonumeros(Console.ReadLine());
+                    turma = Listaturma.Find(x => x.Codigo == n);
+                }
+                turma.Coordenador = null;
+            }
         }
 
 
@@ -173,18 +283,24 @@ namespace Escola_Parte_2._1
             Console.Write("Digite o número de matricula: ");
             n = Sonumeros(Console.ReadLine());
             Aluno aluno = ListaAlunos.Find(x => x.Matricula == n);
-            if (aluno == null)
+            while(aluno == null)
             {
-                Console.WriteLine("Matricula não existe");
+                Console.WriteLine("O aluno existe porém, seu matricula está incorreto");
+                Console.Write("Digite novamente: ");
+                n = Sonumeros(Console.ReadLine());
+                aluno = ListaAlunos.Find(x => x.Matricula == n);
             }
-            else
-            {
-                aluno = ListaAlunos.Where(a => a.Matricula == n).FirstOrDefault(); // Metodo para procurar dentro da lista de alunos o aluno com a matricula cadastrada
-            }
+
             Console.Write("Digite o número do código da turma: ");
             n = Sonumeros(Console.ReadLine());
             Turma turma = Listaturma.Find(x => x.Codigo == n);
-
+            while (turma == null)
+            {
+                Console.WriteLine("Turma existe porém seu codigo está incorreto");
+                Console.Write("Digite novamente: ");
+                n = Sonumeros(Console.ReadLine());
+                turma = Listaturma.Find(x => x.Codigo == n);
+            }
             if (turma.ListaAlunosAtribuidos.Count == turma.Tamanho)
             {
                 Console.WriteLine("Essa turma está cheia");
@@ -205,23 +321,23 @@ namespace Escola_Parte_2._1
         }
         public void MostrarFinalProfessor()
         {
-            foreach (Turma turm in Listaturma)
-            {
-                turm.ExibirProfessor();
-            }
+            foreach (Turma turm in Listaturma)           
+                turm.ExibirProfessor();      
+        }
+        public void MostrarFinalCoordenador()
+        {
+            foreach(Turma turm in Listaturma)
+                turm.ExibirCoordenador();
         }
         public void MostrarAlunos()
         {
             foreach (Aluno aluno in ListaAlunos)
-
                 Console.WriteLine($"alunos {aluno.Nome} do sexo {aluno.Sexo} com a idade {aluno.Idade}, " +
                                   $"registrado com a matricula: {aluno.Matricula}\n O aluno tem Bolsa? {aluno.Bolsista}");
-
         }
         public void MostrarProfessor()
         {
             foreach (Professor prof in ListaProfessor)
-
                 Console.WriteLine($"Professores {prof.Nome} do sexo {prof.Sexo} com a idade {prof.Idade}, " +
                                   $" com o número de registro {prof.Registro}, Sendo como responsavel: O coordenador {prof.Responsavel.Nome} com o registro  {prof.Responsavel.Registro}");
         }
@@ -229,14 +345,12 @@ namespace Escola_Parte_2._1
         public void MostrarCoordenador()
         {
             foreach (Coordenador cor in ListaCoordenador)
-
                 Console.WriteLine($"Coordenadores {cor.Nome} do sexo {cor.Sexo} com a idade {cor.Idade}, " +
                                   $" com o número de registro {cor.Registro}");
         }
         public void MostrarTurmas()
         {
             foreach (Turma turma in Listaturma)
-
                 Console.WriteLine($"O codigo da turma é {turma.Codigo}");
         }
 
@@ -247,7 +361,6 @@ namespace Escola_Parte_2._1
                 turm.MostrarTudo();
                 Console.WriteLine();
             }
-
         }
         static int Sonumeros(string s) // Metodo para aceitar apenas numeros dentro do string para converter em int
         {
@@ -256,7 +369,6 @@ namespace Escola_Parte_2._1
             {
                 Console.WriteLine("Numero invalido");
                 s = Console.ReadLine();
-
             }
             return n;
 
@@ -271,9 +383,6 @@ namespace Escola_Parte_2._1
 
             }
             return n;
-
         }
-
-
     }
 }
